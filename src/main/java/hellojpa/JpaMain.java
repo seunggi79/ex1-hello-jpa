@@ -17,15 +17,6 @@ public class JpaMain {
         tx.begin();
 
         try{
-            Member member = new Member(200L, "NNN");
-            em.persist(member);
-
-            // 영속
-            member = em.find(Member.class, 200L);
-            member.setName("AAA");
-            em.detach(member);
-
-
             System.out.println("=============");
             tx.commit();
         }catch (Exception e){
