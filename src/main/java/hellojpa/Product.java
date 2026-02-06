@@ -2,24 +2,18 @@ package hellojpa;
 
 import jakarta.persistence.*;
 
-import java.sql.Array;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Entity
-public class Member {
+public class Product {
+
     @Id @GeneratedValue
     private Long id;
-    @Column(name = "USERNAME")
     private String name;
 
-    @OneToOne
-    @JoinColumn(name = "LOCKER_ID")
-    private Locker locker;
-
-
-    @OneToMany(mappedBy = "member")
+    @OneToMany(mappedBy = "product")
     private List<MemberProduct> memberProducts = new ArrayList<>();
 
     public Long getId() {
@@ -36,14 +30,6 @@ public class Member {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Locker getLocker() {
-        return locker;
-    }
-
-    public void setLocker(Locker locker) {
-        this.locker = locker;
     }
 
     public List<MemberProduct> getMemberProducts() {

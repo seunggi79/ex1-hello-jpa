@@ -27,6 +27,9 @@ public class JpaMain {
             team.getMembers().add(member);
             em.persist(team);
 
+            em.flush();
+            em.clear();
+
             tx.commit();
         }catch (Exception e){
             e.printStackTrace();
