@@ -31,10 +31,6 @@ public class JpaMain {
             em.flush();
             em.clear();
 
-            //조회
-            Team findTeam = em.find(Team.class, team.getId());
-            int memberSize = findTeam.getMembers().size(); //역방향 조회
-
 
             tx.commit();
         }catch (Exception e){

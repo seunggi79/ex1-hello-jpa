@@ -45,5 +45,7 @@ public class Member {
 
     public void setTeam(Team team) {
         this.team = team;
+        // 연관관계 편의 메소드 만들기
+        //team.getMembers().add(this);
     }
 }
