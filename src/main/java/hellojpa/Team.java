@@ -1,9 +1,6 @@
 package hellojpa;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,9 +9,11 @@ import java.util.List;
 public class Team {
     @Id
     @GeneratedValue
+    @Column(name = "TEAM_ID")
     private Long id;
     private String name;
-    @OneToMany(mappedBy = "team")
+    @OneToMany
+    @JoinColumn(name="TEAM_ID")
     List<Member> members = new ArrayList<Member>();
 
     public Long getId() {
