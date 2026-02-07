@@ -2,25 +2,30 @@ package hellojpa;
 
 import jakarta.persistence.*;
 
-import java.sql.Array;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.time.LocalDateTime;
 
 @Entity
-public class Member extends BaseEntity{
-    @Id @GeneratedValue
+public class Member{
+    @Id
+    @GeneratedValue
+    @Column(name = "MEMBER_ID")
     private Long id;
     @Column(name = "USERNAME")
     private String name;
 
-    @OneToOne
-    @JoinColumn(name = "LOCKER_ID")
-    private Locker locker;
 
+    @Embedded
+    private Period workPeriod;
+    @Embedded
+    private Adress homeAddress;
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name="city", column = @Column(name = "WORK_CITY")),
+            @AttributeOverride(name="street", column = @Column(name = "WORK_STREET")),
+            @AttributeOverride(name="zipcode", column = @Column(name = "WORK_ZIPCODE"))
+    })
+    private Adress workAddress;
 
-    @OneToMany(mappedBy = "member")
-    private List<MemberProduct> memberProducts = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -38,19 +43,4 @@ public class Member extends BaseEntity{
         this.name = name;
     }
 
-    public Locker getLocker() {
-        return locker;
-    }
-
-    public void setLocker(Locker locker) {
-        this.locker = locker;
-    }
-
-    public List<MemberProduct> getMemberProducts() {
-        return memberProducts;
-    }
-
-    public void setMemberProducts(List<MemberProduct> memberProducts) {
-        this.memberProducts = memberProducts;
-    }
 }

@@ -18,16 +18,6 @@ public class JpaMain {
 
         try{
 
-            Movie movie = new Movie();
-            movie.setDirector("aaaa");
-            movie.setActor("bbbb");
-            movie.setName("바람과 함께");
-            movie.setPrice(10000);
-            em.persist(movie);
-
-            em.flush();
-            em.clear();
-
             tx.commit();
         }catch (Exception e){
             e.printStackTrace();
