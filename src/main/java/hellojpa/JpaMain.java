@@ -18,14 +18,12 @@ public class JpaMain {
 
         try{
 
-            Member member = new Member();
-            member.setName("member1");
-            em.persist(member);
-
-            Team team = new Team();
-            team.setName("teamA");
-            team.getMembers().add(member);
-            em.persist(team);
+            Movie movie = new Movie();
+            movie.setDirector("aaaa");
+            movie.setActor("bbbb");
+            movie.setName("바람과 함께");
+            movie.setPrice(10000);
+            em.persist(movie);
 
             em.flush();
             em.clear();
