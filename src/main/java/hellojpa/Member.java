@@ -2,7 +2,10 @@ package hellojpa;
 
 import jakarta.persistence.*;
 
-import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Member{
@@ -13,18 +16,17 @@ public class Member{
     @Column(name = "USERNAME")
     private String name;
 
+    @Embedded
+    private Address homeAddress;
 
-    @Embedded
-    private Period workPeriod;
-    @Embedded
-    private Adress homeAddress;
-    @Embedded
-    @AttributeOverrides({
-            @AttributeOverride(name="city", column = @Column(name = "WORK_CITY")),
-            @AttributeOverride(name="street", column = @Column(name = "WORK_STREET")),
-            @AttributeOverride(name="zipcode", column = @Column(name = "WORK_ZIPCODE"))
-    })
-    private Adress workAddress;
+    @ElementCollection
+    @CollectionTable(name = "FAVORITE_FOOD", joinColumns = @JoinColumn(name = "MEMBER_ID"))
+    @Column(name = "FOOD_NAME")
+    private Set<String> favoriteFoods = new HashSet<>();
+
+    @ElementCollection
+    @CollectionTable(name = "FAVORITE_FOOD", joinColumns = @JoinColumn(name = "MEMBER_ID"))
+    private List<Address> addressHistory = new ArrayList<>();
 
 
     public Long getId() {
